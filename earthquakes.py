@@ -38,24 +38,22 @@ import json
 
 def main():
    infile = open('eq_data.json', 'r')
+   eq = json.load(infile)
 
-   earthquakes = json.load(infile)
-   min_magnitude = 6
+   print('Total earthquakes:', len(eq['features']), '\n')
 
    eq_dict = {}
-   quake_info = earthquakes["features"]
-   for quake_info in quake_info:
-      magnitude = quake_info['properties']['mag']
-      if magnitude > min_magnitude:
-         eq_dict['Magnitude'] = quake_info['properties']['mag']
-         eq_dict['Location'] = quake_info['properties']['place']
-         eq_dict['Latitude'] = quake_info['geometry']['coordinates'][1]
-         eq_dict['Longitude'] = quake_info['geometry']['coordinates'][0]
-         print(f"Location: {eq_dict['Location']}")
-         print(f"Magnitude: {eq_dict['Magnitude']}")
-         print(f"Longitude: {eq_dict['Longitude']}")
-         print(f"Latitude: {eq_dict['Latitude']}")
-         print('\n'*2)
-         
-if __name__ == '__main__':
-   main()
+   i = 0
+   for earthquake in eq['features']:
+      if earthquake['properties']['mag'] > 6:
+         location = earthquake['properties']['place']
+         magnitude = earthquake['properties']['place']
+         longitude = earthquake['geometry']['coordinates'][0]
+         latitude = earthquake['geometry']['coordinates'][1]
+
+         eq_dict[i] = (f'Location: {location} \nMagnitude: {magnitude}\nLongitude: {longitude}\nLatitude: {latitude}\n\n')
+
+         i += 1
+   for row in eq_dict:
+      print(eq_dict[row])
+main()
