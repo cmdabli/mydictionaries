@@ -49,11 +49,13 @@ def main():
       if magnitude > min_magnitude:
          eq_dict['Magnitude'] = quake_info['properties']['mag']
          eq_dict['Location'] = quake_info['properties']['place']
-         eq_dict['Latitude'] = quake_info['geometry']['coordinates'][0]
-         eq_dict['Longitude'] = quake_info['geometry']['coordinates'][1]
+         eq_dict['Latitude'] = quake_info['geometry']['coordinates'][1]
+         eq_dict['Longitude'] = quake_info['geometry']['coordinates'][0]
          print(f"Location: {eq_dict['Location']}")
          print(f"Magnitude: {eq_dict['Magnitude']}")
          print(f"Longitude: {eq_dict['Longitude']}")
          print(f"Latitude: {eq_dict['Latitude']}")
          print('\n'*2)
          
+if __name__ == '__main__':
+   main()
